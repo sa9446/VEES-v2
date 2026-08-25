@@ -1,20 +1,24 @@
+import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
-import Calculator from '@/components/Calculator';
+import Flavors from '@/components/Flavors';
 import Comparison from '@/components/Comparison';
-import UseCases from '@/components/UseCases';
-import Roadmap from '@/components/Roadmap';
-import Waitlist from '@/components/Waitlist';
+import Calculator from '@/components/Calculator';
+import Reviews from '@/components/Reviews';
+import FAQ from '@/components/FAQ';
+import Buy from '@/components/Buy';
 import Footer from '@/components/Footer';
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-brand-dark via-brand-slate to-brand-dark">
+    <main className="min-h-screen bg-cream">
+      <Navbar />
       <Hero />
-      <Calculator />
+      <Flavors />
       <Comparison />
-      <UseCases />
-      <Roadmap />
-      <Waitlist />
+      <Calculator />
+      <Reviews />
+      <FAQ />
+      <Buy />
       <Footer />
     </main>
   );

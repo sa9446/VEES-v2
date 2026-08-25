@@ -2,49 +2,51 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-const comparisonData = [
+import { Check, X } from 'lucide-react';
+
+const benefits = [
   {
-    feature: 'Price per dose',
-    vees: '₹10',
-    energyDrink: '₹120',
-    coffee: '₹80',
+    icon: '💸',
+    title: 'No ₹120 Price Tag',
+    subtitle: 'Only ₹10 per chew',
+    description: 'Energy drinks cost ₹120. Coffee costs ₹80. VEES gives you the same kick for one-tenth the price.',
   },
   {
-    feature: 'Onset time',
-    vees: '5-10 min',
-    energyDrink: '35-45 min',
-    coffee: '20-30 min',
+    icon: '🫧',
+    title: 'No Sloshy Stomach',
+    subtitle: 'Zero liquid needed',
+    description: 'Pop a chew, skip the 250ml can or hot cup. Your stomach stays happy while you stay energized.',
   },
   {
-    feature: 'Portability',
-    vees: '✓ Pocket-sized',
-    energyDrink: '✗ Heavy can',
-    coffee: '✗ Hot cup',
+    icon: '⚡',
+    title: 'Kicks in 5 Minutes',
+    subtitle: 'Fastest energy on the go',
+    description: 'Coffee takes 20-30 minutes. Energy drinks take 35-45. VEES melts fast and hits your system even faster.',
   },
   {
-    feature: 'Liquid volume',
-    vees: '0 ml',
-    energyDrink: '250 ml',
-    coffee: '150 ml',
+    icon: '👖',
+    title: 'Fits in Your Pocket',
+    subtitle: 'No bag, no cup, no mess',
+    description: 'A tiny pouch that slides right into your pocket, wallet, or bag. Take energy anywhere without the bulk.',
   },
   {
-    feature: 'Stomach bloat',
-    vees: '✓ None',
-    energyDrink: '✗ Severe',
-    coffee: '✗ Moderate',
+    icon: '🌱',
+    title: '100% Vegetarian',
+    subtitle: 'No gelatin, no guilt',
+    description: 'Made with plant-based ingredients. No animal products. Perfect for vegetarians and vegans alike.',
   },
   {
-    feature: 'Caffeine dose',
-    vees: '60 mg',
-    energyDrink: '80-120 mg',
-    coffee: '95 mg',
+    icon: '🍬',
+    title: 'Low Sugar, Low Cal',
+    subtitle: 'Sweet without the crash',
+    description: 'Tastes like candy, works like caffeine. Zero sugar spike, no crash, just clean sustained energy.',
   },
 ];
 
 export default function Comparison() {
   return (
-    <section id="comparison" className="py-24 px-4 relative overflow-hidden">
-      <div className="container mx-auto max-w-7xl">
+    <section id="why-vees" className="py-24 px-4 bg-cream">
+      <div className="container mx-auto max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -52,86 +54,112 @@ export default function Comparison() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="section-title">
-            <span className="gradient-text">VEES vs The Competition</span>
+          <h2 className="section-title text-brand-dark">
+            Why Ditch Coffee &amp;
+            <br className="hidden sm:block" /> Energy Drinks? 🤔
           </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            See why VEES is the superior choice for on-the-go energy.
+          <p className="section-subtitle">
+            VEES solves every problem with traditional caffeine sources. Here&apos;s why thousands are switching.
           </p>
         </motion.div>
 
-        {/* Desktop Comparison Table */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.8 }}
-          viewport={{ once: true }}
-          className="hidden md:block glass rounded-2xl overflow-hidden"
-        >
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead>
-                <tr className="border-b border-white/10">
-                  <th className="px-6 py-4 text-left font-bold text-gray-300">Feature</th>
-                  <th className="px-6 py-4 text-center font-bold text-brand-lime">VEES</th>
-                  <th className="px-6 py-4 text-center font-bold text-gray-400">Energy Drink</th>
-                  <th className="px-6 py-4 text-center font-bold text-gray-400">Coffee</th>
-                </tr>
-              </thead>
-              <tbody>
-                {comparisonData.map((row, idx) => (
-                  <tr key={idx} className="border-b border-white/5 hover:bg-white/5 transition-colors">
-                    <td className="px-6 py-4 text-gray-300 font-semibold">{row.feature}</td>
-                    <td className="px-6 py-4 text-center text-brand-lime font-bold">{row.vees}</td>
-                    <td className="px-6 py-4 text-center text-gray-400">{row.energyDrink}</td>
-                    <td className="px-6 py-4 text-center text-gray-400">{row.coffee}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </motion.div>
-
-        {/* Mobile Comparison Cards */}
-        <div className="md:hidden space-y-4">
-          {comparisonData.map((row, idx) => (
+        {/* Benefits Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {benefits.map((benefit, idx) => (
             <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 20 }}
+              key={benefit.title}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 + idx * 0.05, duration: 0.6 }}
+              transition={{ delay: idx * 0.1, duration: 0.7 }}
               viewport={{ once: true }}
-              className="glass rounded-lg p-4"
+              whileHover={{ y: -4 }}
+              className="card-hover p-8"
             >
-              <h3 className="font-bold text-gray-300 mb-3">{row.feature}</h3>
-              <div className="space-y-2">
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-400">VEES:</span>
-                  <span className="text-brand-lime font-bold">{row.vees}</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-400">Energy Drink:</span>
-                  <span className="text-gray-300">{row.energyDrink}</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-400">Coffee:</span>
-                  <span className="text-gray-300">{row.coffee}</span>
-                </div>
-              </div>
+              <span className="text-4xl mb-4 block">{benefit.icon}</span>
+              <h3 className="font-display text-xl font-black text-brand-dark mb-1">
+                {benefit.title}
+              </h3>
+              <p className="text-sm font-semibold text-mint-vibrant mb-3">
+                {benefit.subtitle}
+              </p>
+              <p className="text-brand-muted text-sm leading-relaxed">
+                {benefit.description}
+              </p>
             </motion.div>
           ))}
         </div>
 
-        {/* Badge */}
+        {/* Quick comparison row */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.6, duration: 0.6 }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4, duration: 0.8 }}
           viewport={{ once: true }}
-          className="flex justify-center mt-12"
+          className="mt-16 card p-8"
         >
-          <div className="inline-block glass rounded-full px-6 py-3 border-2 border-brand-lime">
-            <span className="text-brand-lime font-bold">✓ BEST VALUE PROPOSITION</span>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* VEES */}
+            <div className="text-center">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-mint-vibrant text-white font-bold mb-4">
+                <Check className="w-4 h-4" /> VEES
+              </div>
+              <ul className="space-y-2 text-sm text-brand-muted">
+                <li className="flex items-center justify-center gap-2">
+                  <Check className="w-4 h-4 text-mint-vibrant" /> ₹10 per dose
+                </li>
+                <li className="flex items-center justify-center gap-2">
+                  <Check className="w-4 h-4 text-mint-vibrant" /> 5 min onset
+                </li>
+                <li className="flex items-center justify-center gap-2">
+                  <Check className="w-4 h-4 text-mint-vibrant" /> Pocket-sized
+                </li>
+                <li className="flex items-center justify-center gap-2">
+                  <Check className="w-4 h-4 text-mint-vibrant" /> Zero bloat
+                </li>
+              </ul>
+            </div>
+
+            {/* Energy Drink */}
+            <div className="text-center">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gray-100 text-brand-muted font-bold mb-4">
+                Energy Drink
+              </div>
+              <ul className="space-y-2 text-sm text-brand-muted">
+                <li className="flex items-center justify-center gap-2">
+                  <X className="w-4 h-4 text-red-400" /> ₹120+ per can
+                </li>
+                <li className="flex items-center justify-center gap-2">
+                  <X className="w-4 h-4 text-red-400" /> 35-45 min onset
+                </li>
+                <li className="flex items-center justify-center gap-2">
+                  <X className="w-4 h-4 text-red-400" /> Heavy 250ml can
+                </li>
+                <li className="flex items-center justify-center gap-2">
+                  <X className="w-4 h-4 text-red-400" /> Severe bloat
+                </li>
+              </ul>
+            </div>
+
+            {/* Coffee */}
+            <div className="text-center">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gray-100 text-brand-muted font-bold mb-4">
+                ☕ Coffee
+              </div>
+              <ul className="space-y-2 text-sm text-brand-muted">
+                <li className="flex items-center justify-center gap-2">
+                  <X className="w-4 h-4 text-red-400" /> ₹80+ per cup
+                </li>
+                <li className="flex items-center justify-center gap-2">
+                  <X className="w-4 h-4 text-red-400" /> 20-30 min onset
+                </li>
+                <li className="flex items-center justify-center gap-2">
+                  <X className="w-4 h-4 text-red-400" /> Hot cup needed
+                </li>
+                <li className="flex items-center justify-center gap-2">
+                  <X className="w-4 h-4 text-red-400" /> Moderate bloat
+                </li>
+              </ul>
+            </div>
           </div>
         </motion.div>
       </div>

@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { Syne, DM_Sans } from "next/font/google";
+import { Poppins, DM_Sans } from "next/font/google";
 import "./globals.css";
 
-const display = Syne({
+const display = Poppins({
   subsets: ["latin"],
   variable: "--font-display",
-  weight: ["600", "700", "800"],
+  weight: ["600", "700", "800", "900"],
 });
 
 const body = DM_Sans({
@@ -16,9 +16,9 @@ const body = DM_Sans({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://vees-v2.vercel.app"),
-  title: "VEES — Energy, Evolved",
+  title: "VEES — Fun, Fast, Delicious Daily Energy",
   description:
-    "The ₹10 Daily Caffeine Chew. Fast-acting, pocket-sized energy for gym-goers, students, and night-shift workers.",
+    "Pocket-sized caffeine chews that kick in 5 minutes. Only ₹10. Three amazing flavors. No sloshy stomach, no ₹120 price tag.",
   icons: {
     icon: [
       { url: "/favicon.svg", type: "image/svg+xml" },
@@ -31,24 +31,24 @@ export const metadata: Metadata = {
     type: "website",
     url: "/",
     siteName: "VEES",
-    title: "VEES — Energy, Evolved",
+    title: "VEES — Fun, Fast, Delicious Daily Energy",
     description:
-      "The ₹10 Daily Caffeine Chew. Fast-acting, pocket-sized energy for gym-goers, students, and night-shift workers.",
+      "Pocket-sized caffeine chews that kick in 5 minutes. Only ₹10. Three amazing flavors.",
     locale: "en_US",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "VEES — Energy, Evolved. The ₹10 daily caffeine chew.",
+        alt: "VEES Energy Chews — Mint Lime, Green Apple, Bold Cola",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "VEES — Energy, Evolved",
+    title: "VEES — Fun, Fast, Delicious Daily Energy",
     description:
-      "The ₹10 Daily Caffeine Chew. Fast-acting, pocket-sized energy for gym-goers, students, and night-shift workers.",
+      "Pocket-sized caffeine chews that kick in 5 minutes. Only ₹10. Three amazing flavors.",
     images: ["/og-image.png"],
   },
 };
@@ -61,7 +61,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body
-        className={`${display.variable} ${body.variable} font-sans bg-brand-dark text-white overflow-x-hidden antialiased`}
+        className={`${display.variable} ${body.variable} font-sans bg-cream text-brand-text overflow-x-hidden antialiased`}
       >
         {children}
       </body>
