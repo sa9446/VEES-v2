@@ -28,7 +28,7 @@ export default function Footer() {
               <span className="text-xs font-semibold text-white/50 tracking-widest uppercase">Energy Chews</span>
             </div>
             <p className="text-white/60 text-sm max-w-xs leading-relaxed">
-              The Gods On This. The ₹10 chew that&apos;s replacing coffee for thousands.
+              The Gods Ran On This. The ₹10 chew that&apos;s replacing coffee for thousands.
             </p>
           </motion.div>
 

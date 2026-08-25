@@ -1,26 +1,21 @@
 'use client';
 
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Zap, Star, Truck, Leaf } from 'lucide-react';
 import { useFlavor } from '@/contexts/FlavorContext';
+import Image from 'next/image';
 
-const pouchGradients: Record<string, string> = {
-  cola: 'linear-gradient(180deg, #8B5E3C, #3E1F0D)',
-  mint: 'linear-gradient(180deg, #A8E6CF, #00C9A7)',
-  apple: 'linear-gradient(180deg, #B8E986, #6ABF4B)',
+const pouchImages: Record<string, string> = {
+  cola: '/pouch-cola.svg',
+  mint: '/pouch-mint.svg',
+  apple: '/pouch-apple.svg',
 };
 
-const pouchEmojis: Record<string, string> = {
-  cola: '🥤',
-  mint: '🍃',
-  apple: '🍏',
-};
-
-const pouchLabels: Record<string, { name: string; tagline: string }> = {
-  cola: { name: 'Cola', tagline: 'Bold & Zingy' },
-  mint: { name: 'Mint Lime', tagline: 'Refreshing' },
-  apple: { name: 'Green Apple', tagline: 'Zingy & Sweet' },
+const flavorNames: Record<string, string> = {
+  cola: 'Bold Cola',
+  mint: 'Mint Lime',
+  apple: 'Green Apple',
 };
 
 export default function Hero() {
@@ -30,11 +25,9 @@ export default function Hero() {
     document.getElementById('buy')?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const otherFlavors = (['cola', 'mint', 'apple'] as const).filter(f => f !== activeFlavor);
-
   return (
     <section className="min-h-screen flex items-center relative overflow-hidden pt-24 pb-16 transition-colors duration-600">
-      {/* Warm background glow - changes with flavor */}
+      {/* Warm background glow */}
       <div className="absolute inset-0 hero-glow" />
       <div className="absolute inset-0 bg-noise opacity-30 pointer-events-none mix-blend-overlay" />
 
@@ -109,7 +102,7 @@ export default function Hero() {
             >
               The Gods
               <br />
-              <span className="gradient-hero">On This</span>
+              <span className="gradient-hero">Ran On This</span>
             </motion.h1>
 
             <motion.p
@@ -170,7 +163,7 @@ export default function Hero() {
             </motion.div>
           </motion.div>
 
-          {/* Right: Pouch Renders */}
+          {/* Right: Centered Product Pouch */}
           <motion.div
             initial={{ opacity: 0, scale: 0.85 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -178,59 +171,58 @@ export default function Hero() {
             className="flex items-center justify-center lg:justify-end"
           >
             <div className="relative">
-              <div className="flex gap-4 lg:gap-6">
-                {/* Active flavor - large */}
+              <AnimatePresence mode="wait">
                 <motion.div
                   key={activeFlavor}
-                  initial={{ scale: 0.8, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1, y: [-8, 8, -8] }}
+                  initial={{ opacity: 0, scale: 0.9, rotateY: -10 }}
+                  animate={{ opacity: 1, scale: 1, rotateY: 0, y: [-6, 6, -6] }}
+                  exit={{ opacity: 0, scale: 0.9, rotateY: 10 }}
                   transition={{
-                    y: { duration: 4, repeat: Infinity, ease: 'easeInOut' },
+                    opacity: { duration: 0.4 },
                     scale: { duration: 0.4 },
+                    rotateY: { duration: 0.4 },
+                    y: { duration: 4, repeat: Infinity, ease: 'easeInOut' },
                   }}
-                  className="w-32 h-48 lg:w-40 lg:h-56 rounded-3xl flex flex-col items-center justify-center border-2 transition-all duration-500"
-                  style={{
-                    background: pouchGradients[activeFlavor],
-                    boxShadow: colors.shadow,
-                    borderColor: `${colors.accent}40`,
-                  }}
+                  className="relative"
                 >
-                  <span className="text-5xl lg:text-6xl mb-2">{pouchEmojis[activeFlavor]}</span>
-                  <span className="font-display font-black text-white text-base lg:text-lg">
-                    {pouchLabels[activeFlavor].name}
-                  </span>
-                  <span className="text-white/80 text-xs mt-1">{pouchLabels[activeFlavor].tagline}</span>
+                  {/* Glow behind pouch */}
+                  <div
+                    className="absolute inset-0 rounded-full blur-3xl opacity-40 transition-colors duration-600"
+                    style={{ backgroundColor: colors.accent }}
+                  />
+
+                  {/* Product image */}
+                  <div className="relative w-64 h-80 lg:w-80 lg:h-[26rem] mx-auto">
+                    <Image
+                      src={pouchImages[activeFlavor]}
+                      alt={`VEES ${flavorNames[activeFlavor]} pouch`}
+                      fill
+                      className="object-contain drop-shadow-2xl"
+                      priority
+                    />
+                  </div>
                 </motion.div>
+              </AnimatePresence>
 
-                {/* Other two flavors - smaller */}
-                {otherFlavors.map((flavor, i) => (
-                  <motion.div
-                    key={flavor}
-                    animate={{ y: [6, -6, 6] }}
-                    transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: i * 0.5 }}
-                    className="w-24 h-36 lg:w-28 lg:h-40 rounded-3xl flex flex-col items-center justify-center opacity-50 border border-white/20 cursor-pointer hover:opacity-80 transition-opacity"
-                    style={{ background: pouchGradients[flavor] }}
-                    onClick={() => {
-                      const { setActiveFlavor } = require('@/contexts/FlavorContext').useFlavor();
-                    }}
-                  >
-                    <span className="text-3xl mb-1">{pouchEmojis[flavor]}</span>
-                    <span className="font-display font-black text-white text-xs">
-                      {pouchLabels[flavor].name}
-                    </span>
-                  </motion.div>
-                ))}
-              </div>
-
-              {/* Price badge */}
+              {/* Flavor label */}
               <motion.div
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ delay: 1, type: 'spring', stiffness: 200 }}
-                className="absolute -bottom-4 left-1/2 -translate-x-1/2 text-white font-black text-xl px-6 py-3 rounded-2xl transition-all duration-500"
-                style={{ backgroundColor: colors.accent, boxShadow: colors.shadow }}
+                className="text-center mt-4"
               >
-                Only ₹10/chew
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={activeFlavor}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    className="inline-block px-4 py-2 rounded-full text-sm font-bold transition-colors duration-500"
+                    style={{ backgroundColor: `${colors.accent}18`, color: colors.accent }}
+                  >
+                    {flavorNames[activeFlavor]} — ₹10
+                  </motion.span>
+                </AnimatePresence>
               </motion.div>
             </div>
           </motion.div>
