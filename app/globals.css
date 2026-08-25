@@ -121,9 +121,10 @@ body {
   z-index: 20;
 }
 
-/* Section spacing */
+/* Ensure clean stacking */
 section {
   position: relative;
+  isolation: isolate;
 }
 
 /* Hero glow */
