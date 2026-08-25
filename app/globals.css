@@ -113,11 +113,17 @@ body {
 
 /* Floating badge */
 .badge {
-  @apply inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold;
+  @apply inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold whitespace-nowrap;
   background: var(--flavor-badge, #D1F5EA);
   color: var(--flavor-accent-dark, #009B82);
   border: 1px solid var(--flavor-accent-light, #7BC8A4);
   transition: all 0.5s ease;
+  z-index: 20;
+}
+
+/* Section spacing */
+section {
+  position: relative;
 }
 
 /* Hero glow */
