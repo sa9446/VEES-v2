@@ -35,7 +35,7 @@ export default function Footer() {
               </span>
             </div>
             <p className="text-gray-400 text-sm max-w-xs leading-relaxed">
-              Fun, fast, delicious daily energy. The ₹10 chew that&apos;s replacing
+              The Gods On This. The ₹10 chew that&apos;s replacing
               coffee for thousands of Indians.
             </p>
           </motion.div>

@@ -82,11 +82,9 @@ export default function Hero() {
               transition={{ delay: 0.2, duration: 0.8 }}
               className="font-display text-5xl sm:text-6xl lg:text-7xl font-black leading-[1.05] tracking-tight text-brand-dark"
             >
-              Fun, Fast &
+              The Gods
               <br />
-              <span className="gradient-hero">Delicious</span>
-              <br />
-              Daily Energy.
+              <span className="gradient-hero">On This</span>
             </motion.h1>
 
             <motion.p
