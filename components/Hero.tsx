@@ -3,16 +3,39 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Zap, Star, Truck, Leaf } from 'lucide-react';
+import { useFlavor } from '@/contexts/FlavorContext';
+
+const pouchGradients: Record<string, string> = {
+  cola: 'linear-gradient(180deg, #8B5E3C, #3E1F0D)',
+  mint: 'linear-gradient(180deg, #A8E6CF, #00C9A7)',
+  apple: 'linear-gradient(180deg, #B8E986, #6ABF4B)',
+};
+
+const pouchEmojis: Record<string, string> = {
+  cola: '🥤',
+  mint: '🍃',
+  apple: '🍏',
+};
+
+const pouchLabels: Record<string, { name: string; tagline: string }> = {
+  cola: { name: 'Cola', tagline: 'Bold & Zingy' },
+  mint: { name: 'Mint Lime', tagline: 'Refreshing' },
+  apple: { name: 'Green Apple', tagline: 'Zingy & Sweet' },
+};
 
 export default function Hero() {
+  const { colors, activeFlavor } = useFlavor();
+
   const scrollToBuy = () => {
     document.getElementById('buy')?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const otherFlavors = (['cola', 'mint', 'apple'] as const).filter(f => f !== activeFlavor);
+
   return (
-    <section className="min-h-screen flex items-center relative overflow-hidden pt-24 pb-16">
-      {/* Warm background glow */}
-      <div className="absolute inset-0 bg-hero-warm" />
+    <section className="min-h-screen flex items-center relative overflow-hidden pt-24 pb-16 transition-colors duration-600">
+      {/* Warm background glow - changes with flavor */}
+      <div className="absolute inset-0 hero-glow" />
       <div className="absolute inset-0 bg-noise opacity-30 pointer-events-none mix-blend-overlay" />
 
       {/* Floating badges */}
@@ -22,7 +45,7 @@ export default function Hero() {
         transition={{ delay: 1.2, duration: 0.8 }}
         className="absolute top-32 left-4 lg:left-12 z-10 hidden lg:block"
       >
-        <div className="badge-mint float">
+        <div className="badge float">
           <Leaf className="w-4 h-4" />
           100% Vegetarian
         </div>
@@ -34,7 +57,7 @@ export default function Hero() {
         transition={{ delay: 1.4, duration: 0.8 }}
         className="absolute top-48 right-4 lg:right-12 z-10 hidden lg:block"
       >
-        <div className="badge-apple float" style={{ animationDelay: '0.5s' }}>
+        <div className="badge float" style={{ animationDelay: '0.5s' }}>
           <Zap className="w-4 h-4" />
           Zero Sugar · Low Cal
         </div>
@@ -46,7 +69,7 @@ export default function Hero() {
         transition={{ delay: 1.6, duration: 0.8 }}
         className="absolute bottom-32 left-8 lg:left-20 z-10 hidden lg:block"
       >
-        <div className="badge-cola float" style={{ animationDelay: '1s' }}>
+        <div className="badge float" style={{ animationDelay: '1s' }}>
           <Truck className="w-4 h-4" />
           Pocket-Sized Energy
         </div>
@@ -67,10 +90,11 @@ export default function Hero() {
               transition={{ delay: 0.1, duration: 0.6 }}
               className="flex items-center gap-3"
             >
-              <span className="font-display text-brand-dark tracking-[0.15em] text-sm uppercase font-bold">
+              <span className="font-display tracking-[0.15em] text-sm uppercase font-bold transition-colors duration-500"
+                style={{ color: colors.accent }}>
                 VEES Energy Chews
               </span>
-              <span className="badge-mint text-xs !px-3 !py-1">
+              <span className="badge text-xs !px-3 !py-1">
                 <Star className="w-3 h-3 fill-current" />
                 ★ 4.9/5
               </span>
@@ -80,7 +104,8 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.8 }}
-              className="font-display text-5xl sm:text-6xl lg:text-7xl font-black leading-[1.05] tracking-tight text-brand-dark"
+              className="font-display text-5xl sm:text-6xl lg:text-7xl font-black leading-[1.05] tracking-tight"
+              style={{ color: colors.text }}
             >
               The Gods
               <br />
@@ -91,10 +116,11 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.35, duration: 0.8 }}
-              className="text-xl lg:text-2xl text-brand-muted font-medium max-w-lg"
+              className="text-xl lg:text-2xl font-medium max-w-lg transition-colors duration-500"
+              style={{ color: colors.accentLight }}
             >
               Melts fast, works faster.{' '}
-              <span className="text-mint-vibrant font-bold">Only ₹10</span>{' '}
+              <span className="font-bold" style={{ color: colors.accent }}>Only ₹10</span>{' '}
               per chew.
             </motion.p>
 
@@ -102,12 +128,13 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.8 }}
-              className="flex flex-col gap-3 text-base text-brand-muted"
+              className="flex flex-col gap-3 text-base"
+              style={{ color: colors.accentLight }}
             >
               {[
-                { icon: '⚡', text: 'Kicks in 5 minutes', color: 'text-mint-vibrant' },
-                { icon: '💰', text: '₹10 vs ₹120 energy drinks', color: 'text-apple-vibrant' },
-                { icon: '🏃', text: 'Fits in your pocket — no sloshy stomach', color: 'text-cola-brown' },
+                { icon: '⚡', text: 'Kicks in 5 minutes' },
+                { icon: '💰', text: '₹10 vs ₹120 energy drinks' },
+                { icon: '🏃', text: 'Fits in your pocket — no sloshy stomach' },
               ].map((item) => (
                 <li key={item.text} className="flex items-center gap-3">
                   <span className="text-xl">{item.icon}</span>
@@ -131,7 +158,8 @@ export default function Hero() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1.0, duration: 0.8 }}
-              className="flex items-center gap-2 text-sm text-brand-muted"
+              className="flex items-center gap-2 text-sm"
+              style={{ color: colors.accentLight }}
             >
               <div className="flex -space-x-1">
                 {[...Array(5)].map((_, i) => (
@@ -150,40 +178,48 @@ export default function Hero() {
             className="flex items-center justify-center lg:justify-end"
           >
             <div className="relative">
-              {/* Three flavored pouch cards */}
               <div className="flex gap-4 lg:gap-6">
-                {/* Cola Pouch */}
+                {/* Active flavor - large */}
                 <motion.div
-                  animate={{ y: [-8, 8, -8] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                  className="w-28 h-40 lg:w-36 lg:h-52 rounded-3xl bg-gradient-to-b from-cola-brown to-cola flex flex-col items-center justify-center shadow-cola border-2 border-cola/20"
+                  key={activeFlavor}
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1, y: [-8, 8, -8] }}
+                  transition={{
+                    y: { duration: 4, repeat: Infinity, ease: 'easeInOut' },
+                    scale: { duration: 0.4 },
+                  }}
+                  className="w-32 h-48 lg:w-40 lg:h-56 rounded-3xl flex flex-col items-center justify-center border-2 transition-all duration-500"
+                  style={{
+                    background: pouchGradients[activeFlavor],
+                    boxShadow: colors.shadow,
+                    borderColor: `${colors.accent}40`,
+                  }}
                 >
-                  <span className="text-4xl lg:text-5xl mb-2">🥤</span>
-                  <span className="font-display font-black text-white text-sm lg:text-base">Cola</span>
-                  <span className="text-cola-light/80 text-xs mt-1">Bold & Zingy</span>
+                  <span className="text-5xl lg:text-6xl mb-2">{pouchEmojis[activeFlavor]}</span>
+                  <span className="font-display font-black text-white text-base lg:text-lg">
+                    {pouchLabels[activeFlavor].name}
+                  </span>
+                  <span className="text-white/80 text-xs mt-1">{pouchLabels[activeFlavor].tagline}</span>
                 </motion.div>
 
-                {/* Mint Lime Pouch */}
-                <motion.div
-                  animate={{ y: [8, -8, 8] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
-                  className="w-28 h-40 lg:w-36 lg:h-52 rounded-3xl bg-gradient-to-b from-mint to-mint-vibrant flex flex-col items-center justify-center shadow-mint border-2 border-mint-vibrant/20 -mt-6 lg:-mt-8"
-                >
-                  <span className="text-4xl lg:text-5xl mb-2">🍃</span>
-                  <span className="font-display font-black text-white text-sm lg:text-base">Mint Lime</span>
-                  <span className="text-white/80 text-xs mt-1">Refreshing</span>
-                </motion.div>
-
-                {/* Green Apple Pouch */}
-                <motion.div
-                  animate={{ y: [-6, 6, -6] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-                  className="w-28 h-40 lg:w-36 lg:h-52 rounded-3xl bg-gradient-to-b from-apple to-apple-vibrant flex flex-col items-center justify-center shadow-apple border-2 border-apple-vibrant/20"
-                >
-                  <span className="text-4xl lg:text-5xl mb-2">🍏</span>
-                  <span className="font-display font-black text-white text-sm lg:text-base">Green Apple</span>
-                  <span className="text-white/80 text-xs mt-1">Zingy & Sweet</span>
-                </motion.div>
+                {/* Other two flavors - smaller */}
+                {otherFlavors.map((flavor, i) => (
+                  <motion.div
+                    key={flavor}
+                    animate={{ y: [6, -6, 6] }}
+                    transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: i * 0.5 }}
+                    className="w-24 h-36 lg:w-28 lg:h-40 rounded-3xl flex flex-col items-center justify-center opacity-50 border border-white/20 cursor-pointer hover:opacity-80 transition-opacity"
+                    style={{ background: pouchGradients[flavor] }}
+                    onClick={() => {
+                      const { setActiveFlavor } = require('@/contexts/FlavorContext').useFlavor();
+                    }}
+                  >
+                    <span className="text-3xl mb-1">{pouchEmojis[flavor]}</span>
+                    <span className="font-display font-black text-white text-xs">
+                      {pouchLabels[flavor].name}
+                    </span>
+                  </motion.div>
+                ))}
               </div>
 
               {/* Price badge */}
@@ -191,7 +227,8 @@ export default function Hero() {
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ delay: 1, type: 'spring', stiffness: 200 }}
-                className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-cola text-white font-black text-xl px-6 py-3 rounded-2xl shadow-cola"
+                className="absolute -bottom-4 left-1/2 -translate-x-1/2 text-white font-black text-xl px-6 py-3 rounded-2xl transition-all duration-500"
+                style={{ backgroundColor: colors.accent, boxShadow: colors.shadow }}
               >
                 Only ₹10/chew
               </motion.div>

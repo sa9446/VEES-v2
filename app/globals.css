@@ -13,13 +13,14 @@ html {
 }
 
 body {
-  background-color: #FFF8F0;
-  color: #2D2D3A;
+  background-color: var(--flavor-bg, #EEFBF5);
+  color: var(--flavor-text, #0A2E1F);
+  transition: background-color 0.6s ease, color 0.6s ease;
 }
 
 ::selection {
-  background: rgba(168, 230, 207, 0.4);
-  color: #1A1A2E;
+  background: rgba(0, 201, 167, 0.3);
+  color: var(--flavor-text, #0A2E1F);
 }
 
 /* Card styles */
@@ -28,36 +29,26 @@ body {
   border-radius: 1.25rem;
   border: 1px solid rgba(0, 0, 0, 0.06);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.06);
+  transition: border-color 0.5s ease, box-shadow 0.5s ease;
 }
 
 .card-hover {
-  @apply card transition-all duration-300 hover:shadow-brand-lg hover:-translate-y-1;
+  @apply card transition-all duration-300;
+  &:hover {
+    box-shadow: var(--flavor-shadow, 0 4px 30px rgba(0,0,0,0.1));
+    transform: translateY(-4px);
+  }
 }
 
-/* Gradient text */
-.gradient-mint {
-  background: linear-gradient(135deg, #00C9A7, #7BC8A4);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+/* Flavor-reactive accent text */
+.flavor-text {
+  color: var(--flavor-accent, #00C9A7);
+  transition: color 0.5s ease;
 }
 
-.gradient-apple {
-  background: linear-gradient(135deg, #6ABF4B, #B8E986);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.gradient-cola {
-  background: linear-gradient(135deg, #6B3A1F, #8B5E3C);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
+/* Flavor-reactive gradient text */
 .gradient-hero {
-  background: linear-gradient(135deg, #00C9A7 0%, #6ABF4B 50%, #C8E64B 100%);
+  background: var(--flavor-gradient, linear-gradient(135deg, #00C9A7, #6ABF4B));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -65,15 +56,48 @@ body {
 
 /* Buttons */
 .btn-primary {
-  @apply px-8 py-4 bg-mint-vibrant text-white font-bold rounded-2xl transition-all duration-300 hover:shadow-mint hover:brightness-110 active:scale-95 text-lg;
+  color: white;
+  font-weight: 700;
+  border-radius: 1rem;
+  transition: all 0.4s ease;
+  padding: 1rem 2rem;
+  font-size: 1.125rem;
+  background: var(--flavor-btn-bg, #00C9A7);
+}
+.btn-primary:hover {
+  filter: brightness(1.1);
+  transform: scale(1.02);
+  box-shadow: var(--flavor-shadow, 0 4px 20px rgba(0,201,167,0.35));
+}
+.btn-primary:active {
+  transform: scale(0.98);
 }
 
 .btn-secondary {
-  @apply px-8 py-4 border-2 border-brand-dark text-brand-dark font-bold rounded-2xl transition-all duration-300 hover:bg-brand-dark hover:text-white active:scale-95 text-lg;
+  padding: 1rem 2rem;
+  border: 2px solid var(--flavor-text, #0A2E1F);
+  color: var(--flavor-text, #0A2E1F);
+  font-weight: 700;
+  border-radius: 1rem;
+  transition: all 0.4s ease;
+  font-size: 1.125rem;
+}
+.btn-secondary:hover {
+  background: var(--flavor-text, #0A2E1F);
+  color: var(--flavor-bg, #EEFBF5);
 }
 
 .btn-buy {
-  @apply px-6 py-3 bg-cola text-white font-bold rounded-xl transition-all duration-300 hover:shadow-cola hover:brightness-110 active:scale-95;
+  padding: 0.75rem 1.5rem;
+  color: white;
+  font-weight: 700;
+  border-radius: 0.75rem;
+  transition: all 0.4s ease;
+  background: var(--flavor-btn-bg, #00C9A7);
+}
+.btn-buy:hover {
+  filter: brightness(1.1);
+  box-shadow: var(--flavor-shadow, 0 4px 20px rgba(0,201,167,0.35));
 }
 
 /* Section title */
@@ -82,55 +106,44 @@ body {
 }
 
 .section-subtitle {
-  @apply text-brand-muted text-lg max-w-2xl mx-auto;
+  @apply text-lg max-w-2xl mx-auto;
+  color: var(--flavor-accent-light, #7BC8A4);
+  transition: color 0.5s ease;
 }
 
 /* Floating badge */
 .badge {
-  @apply inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold border;
+  @apply inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold;
+  background: var(--flavor-badge, #D1F5EA);
+  color: var(--flavor-accent-dark, #009B82);
+  border: 1px solid var(--flavor-accent-light, #7BC8A4);
+  transition: all 0.5s ease;
 }
 
-.badge-mint {
-  @apply badge bg-mint/20 text-mint-dark border-mint/30;
+/* Hero glow */
+.hero-glow {
+  background: var(--flavor-hero-glow, radial-gradient(ellipse 80% 60% at 20% 40%, rgba(168,230,207,0.25), transparent 55%));
+  transition: background 0.6s ease;
 }
 
-.badge-apple {
-  @apply badge bg-apple/20 text-apple-dark border-apple/30;
-}
-
-.badge-cola {
-  @apply badge bg-cola/10 text-cola-brown border-cola/20;
-}
-
-/* Flavor card glow effects */
-.glow-mint {
-  box-shadow: 0 0 30px rgba(168, 230, 207, 0.3);
-}
-
-.glow-apple {
-  box-shadow: 0 0 30px rgba(184, 233, 134, 0.3);
-}
-
-.glow-cola {
-  box-shadow: 0 0 30px rgba(107, 58, 31, 0.2);
-}
+/* Pouch glow effects per flavor */
+.glow-cola { box-shadow: 0 0 30px rgba(107, 58, 31, 0.3); }
+.glow-mint { box-shadow: 0 0 30px rgba(0, 201, 167, 0.35); }
+.glow-apple { box-shadow: 0 0 30px rgba(106, 191, 75, 0.35); }
 
 /* Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
-
 ::-webkit-scrollbar-track {
-  background: #FFF8F0;
+  background: var(--flavor-bg, #EEFBF5);
 }
-
 ::-webkit-scrollbar-thumb {
-  background: #A8E6CF;
+  background: var(--flavor-accent, #00C9A7);
   border-radius: 4px;
 }
-
 ::-webkit-scrollbar-thumb:hover {
-  background: #00C9A7;
+  background: var(--flavor-accent-dark, #009B82);
 }
 
 /* Animations */
@@ -138,25 +151,10 @@ body {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-8px); }
 }
-
-.float {
-  animation: float 3s ease-in-out infinite;
-}
+.float { animation: float 3s ease-in-out infinite; }
 
 @keyframes wiggle {
   0%, 100% { transform: rotate(-2deg); }
   50% { transform: rotate(2deg); }
 }
-
-.wiggle {
-  animation: wiggle 2s ease-in-out infinite;
-}
-
-@keyframes pop-in {
-  0% { transform: scale(0.9); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
-}
-
-.pop-in {
-  animation: pop-in 0.5s ease-out forwards;
-}
+.wiggle { animation: wiggle 2s ease-in-out infinite; }

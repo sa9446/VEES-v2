@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Poppins, DM_Sans } from "next/font/google";
 import "./globals.css";
+import { FlavorProvider } from "@/contexts/FlavorContext";
 
 const display = Poppins({
   subsets: ["latin"],
@@ -61,9 +62,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body
-        className={`${display.variable} ${body.variable} font-sans bg-cream text-brand-text overflow-x-hidden antialiased`}
+        className={`${display.variable} ${body.variable} font-sans overflow-x-hidden antialiased`}
       >
-        {children}
+        <FlavorProvider>{children}</FlavorProvider>
       </body>
     </html>
   );
