@@ -16,7 +16,7 @@ const body = DM_Sans({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://vees-v2.vercel.app"),
-  title: "VEES — The Gods On This"
+  title: "VEES — The Gods On This",
   description:
     "Pocket-sized caffeine chews that kick in 5 minutes. Only ₹10. Three amazing flavors. No sloshy stomach, no ₹120 price tag.",
   icons: {
