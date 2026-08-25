@@ -2,8 +2,8 @@
 
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Zap, Star, Truck, Leaf } from 'lucide-react';
-import { useFlavor } from '@/contexts/FlavorContext';
+import { Star } from 'lucide-react';
+import { useFlavor, Flavor } from '@/contexts/FlavorContext';
 import Image from 'next/image';
 
 const pouchImages: Record<string, string> = {
@@ -12,14 +12,36 @@ const pouchImages: Record<string, string> = {
   apple: '/pouch-apple.svg',
 };
 
-const flavorNames: Record<string, string> = {
-  cola: 'Bold Cola',
-  mint: 'Mint Lime',
-  apple: 'Green Apple',
+const flavorData: Record<Flavor, {
+  name: string;
+  emoji: string;
+  tagline: string;
+  gradient: string;
+}> = {
+  cola: {
+    name: 'Bold Cola',
+    emoji: '🥤',
+    tagline: 'Bold & Zingy',
+    gradient: 'linear-gradient(180deg, #8B5E3C, #3E1F0D)',
+  },
+  mint: {
+    name: 'Mint Lime',
+    emoji: '🍃',
+    tagline: 'Refreshing',
+    gradient: 'linear-gradient(180deg, #A8E6CF, #00C9A7)',
+  },
+  apple: {
+    name: 'Green Apple',
+    emoji: '🍏',
+    tagline: 'Zingy & Sweet',
+    gradient: 'linear-gradient(180deg, #B8E986, #6ABF4B)',
+  },
 };
 
+const flavorOrder: Flavor[] = ['cola', 'mint', 'apple'];
+
 export default function Hero() {
-  const { colors, activeFlavor } = useFlavor();
+  const { colors, activeFlavor, setActiveFlavor } = useFlavor();
 
   const scrollToBuy = () => {
     document.getElementById('buy')?.scrollIntoView({ behavior: 'smooth' });
@@ -31,41 +53,16 @@ export default function Hero() {
       <div className="absolute inset-0 hero-glow" />
       <div className="absolute inset-0 bg-noise opacity-30 pointer-events-none mix-blend-overlay" />
 
-      {/* Floating badges - positioned away from content */}
-      <motion.div
-        initial={{ opacity: 0, x: -40 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ delay: 1.2, duration: 0.8 }}
-        className="absolute top-40 left-4 lg:left-8 z-20 hidden lg:block"
-      >
-        <div className="badge float">
-          <Leaf className="w-4 h-4" />
-          100% Vegetarian
-        </div>
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0, x: 40 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ delay: 1.4, duration: 0.8 }}
-        className="absolute top-28 right-4 lg:right-8 z-20 hidden lg:block"
-      >
-        <div className="badge float" style={{ animationDelay: '0.5s' }}>
-          <Zap className="w-4 h-4" />
-          Zero Sugar · Low Cal
-        </div>
-      </motion.div>
-
       {/* Main content */}
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center min-h-[calc(100vh-10rem)]">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
 
           {/* Left: Copy */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            className="space-y-6 lg:space-y-7"
+            className="space-y-6"
           >
             {/* Badge row */}
             <motion.div
@@ -108,9 +105,7 @@ export default function Hero() {
               style={{ color: colors.accentLight }}
             >
               Melts fast, works faster.{' '}
-              <span className="font-bold" style={{ color: colors.accent }}>
-                Only ₹10
-              </span>{' '}
+              <span className="font-bold" style={{ color: colors.accent }}>Only ₹10</span>{' '}
               per chew.
             </motion.p>
 
@@ -148,17 +143,13 @@ export default function Hero() {
               >
                 Order Your Pack — ₹10
               </button>
-
               <div
                 className="flex items-center gap-2 text-sm"
                 style={{ color: colors.accentLight }}
               >
                 <div className="flex -space-x-1">
                   {[...Array(5)].map((_, i) => (
-                    <Star
-                      key={i}
-                      className="w-4 h-4 text-amber-400 fill-amber-400"
-                    />
+                    <Star key={i} className="w-4 h-4 text-amber-400 fill-amber-400" />
                   ))}
                 </div>
                 <span className="font-medium">4.9/5 from early chewers</span>
@@ -166,73 +157,98 @@ export default function Hero() {
             </motion.div>
           </motion.div>
 
-          {/* Right: Centered Product Pouch */}
+          {/* Right: Product Image + Flavor Cards */}
           <motion.div
             initial={{ opacity: 0, scale: 0.85 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.35, duration: 0.9 }}
-            className="flex items-center justify-center"
+            className="flex flex-col items-center gap-6"
           >
-            <div className="relative flex flex-col items-center">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeFlavor}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{
-                    opacity: 1,
-                    scale: 1,
-                    y: [-6, 6, -6],
-                  }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  transition={{
-                    opacity: { duration: 0.4 },
-                    scale: { duration: 0.4 },
-                    y: { duration: 4, repeat: Infinity, ease: 'easeInOut' },
-                  }}
-                  className="relative"
-                >
-                  {/* Glow behind pouch */}
-                  <div
-                    className="absolute inset-0 rounded-full blur-3xl opacity-30 transition-colors duration-600"
-                    style={{ backgroundColor: colors.accent }}
-                  />
-
-                  {/* Product image */}
-                  <div className="relative w-48 h-64 sm:w-56 sm:h-72 md:w-64 md:h-80 lg:w-72 lg:h-96">
-                    <Image
-                      src={pouchImages[activeFlavor]}
-                      alt={`VEES ${flavorNames[activeFlavor]} pouch`}
-                      fill
-                      className="object-contain drop-shadow-2xl"
-                      priority
-                    />
-                  </div>
-                </motion.div>
-              </AnimatePresence>
-
-              {/* Flavor label below pouch */}
+            {/* Centered product pouch image */}
+            <AnimatePresence mode="wait">
               <motion.div
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ delay: 1, type: 'spring', stiffness: 200 }}
-                className="mt-6"
+                key={activeFlavor}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1, y: [-4, 4, -4] }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{
+                  opacity: { duration: 0.4 },
+                  scale: { duration: 0.4 },
+                  y: { duration: 4, repeat: Infinity, ease: 'easeInOut' },
+                }}
+                className="relative"
               >
-                <AnimatePresence mode="wait">
-                  <motion.span
-                    key={activeFlavor}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    className="inline-block px-5 py-2 rounded-full text-sm font-bold transition-colors duration-500"
+                {/* Glow behind pouch */}
+                <div
+                  className="absolute inset-0 rounded-full blur-3xl opacity-30 transition-colors duration-600"
+                  style={{ backgroundColor: colors.accent }}
+                />
+                <div className="relative w-48 h-64 sm:w-56 sm:h-72 md:w-60 md:h-80">
+                  <Image
+                    src={pouchImages[activeFlavor]}
+                    alt={`VEES ${flavorData[activeFlavor].name} pouch`}
+                    fill
+                    className="object-contain drop-shadow-2xl"
+                    priority
+                  />
+                </div>
+              </motion.div>
+            </AnimatePresence>
+
+            {/* 3 Flavor selector cards */}
+            <div className="flex gap-3 sm:gap-4">
+              {flavorOrder.map((flavor) => {
+                const f = flavorData[flavor];
+                const isActive = activeFlavor === flavor;
+
+                return (
+                  <motion.button
+                    key={flavor}
+                    type="button"
+                    onClick={() => setActiveFlavor(flavor)}
+                    whileHover={{ y: -4, scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="relative flex flex-col items-center justify-center rounded-2xl p-3 sm:p-4 transition-all duration-400 cursor-pointer"
                     style={{
-                      backgroundColor: `${colors.accent}18`,
-                      color: colors.accent,
+                      width: '5rem',
+                      height: '6.5rem',
+                      background: isActive ? `${colors.accent}15` : '#FFFFFF',
+                      border: `2px solid ${isActive ? colors.accent : 'rgba(0,0,0,0.08)'}`,
+                      boxShadow: isActive ? colors.shadow : '0 2px 12px rgba(0,0,0,0.06)',
                     }}
                   >
-                    {flavorNames[activeFlavor]} — ₹10
-                  </motion.span>
-                </AnimatePresence>
-              </motion.div>
+                    {/* Pouch thumbnail */}
+                    <div
+                      className="w-10 h-14 rounded-lg flex items-center justify-center mb-1"
+                      style={{ background: f.gradient }}
+                    >
+                      <span className="text-xl">{f.emoji}</span>
+                    </div>
+                    <span
+                      className="font-display text-xs font-black transition-colors duration-500"
+                      style={{ color: isActive ? colors.accent : colors.text }}
+                    >
+                      {f.name}
+                    </span>
+                    <span
+                      className="text-[10px] transition-colors duration-500"
+                      style={{ color: colors.accentLight }}
+                    >
+                      {f.tagline}
+                    </span>
+
+                    {/* Active dot */}
+                    {isActive && (
+                      <motion.div
+                        layoutId="hero-flavor-dot"
+                        className="absolute -bottom-1.5 w-2 h-2 rounded-full transition-colors duration-500"
+                        style={{ backgroundColor: colors.accent }}
+                        transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                      />
+                    )}
+                  </motion.button>
+                );
+              })}
             </div>
           </motion.div>
         </div>
