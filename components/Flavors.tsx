@@ -124,7 +124,7 @@ export default function Flavors() {
                   className="mt-6 text-center font-bold text-sm transition-colors duration-500"
                   style={{ color: isActive ? colors.accent : colors.accentLight }}
                 >
-                  {isActive ? '✓ Selected — Site colors changed!' : 'Tap to explore →'}
+                  {isActive ? `✓ Selected — ${f.name}` : 'Tap to explore →'}
                 </div>
               </motion.button>
             );

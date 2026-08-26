@@ -83,7 +83,7 @@ export default function Buy() {
                   whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
                   className="w-full btn-primary flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed">
                   <ShoppingBag className="w-5 h-5" />
-                  {loading ? 'Signing up...' : submitted ? '✓ You\'re on the list!' : 'Get Early Access — ₹15'}
+                  {loading ? 'Signing up...' : submitted ? '✓ You\'re on the list!' : 'Get Early Access'}
                 </motion.button>
                 {submitted && (
                   <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
