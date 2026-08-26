@@ -105,7 +105,7 @@ export default function Hero() {
               style={{ color: colors.accentLight }}
             >
               Melts fast, works faster.{' '}
-              <span className="font-bold" style={{ color: colors.accent }}>Only ₹10</span>{' '}
+              <span className="font-bold" style={{ color: colors.accent }}>Only ₹15</span>{' '}
               per chew.
             </motion.p>
 
@@ -119,7 +119,7 @@ export default function Hero() {
             >
               {[
                 { icon: '⚡', text: 'Kicks in 5 minutes' },
-                { icon: '💰', text: '₹10 vs ₹120 energy drinks' },
+                { icon: '💰', text: '₹15 vs ₹120 energy drinks' },
                 { icon: '🏃', text: 'Fits in your pocket — no sloshy stomach' },
               ].map((item) => (
                 <li key={item.text} className="flex items-center gap-3">
@@ -141,7 +141,7 @@ export default function Hero() {
                 onClick={scrollToBuy}
                 className="btn-primary"
               >
-                Order Your Pack — ₹10
+                Order Your Pack — ₹15
               </button>
             </motion.div>
 

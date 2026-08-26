@@ -10,7 +10,7 @@ const faqs = [
   { question: 'How much caffeine is in one chew?', answer: 'Each VEES chew contains 60mg of caffeine — about the same as a strong cup of coffee, but without the liquid volume or stomach bloat.' },
   { question: 'Is VEES vegetarian/vegan?', answer: 'VEES is 100% vegetarian. We use no gelatin or animal-derived ingredients. Our formula is designed to be inclusive for all dietary preferences.' },
   { question: 'What does VEES taste like?', answer: 'VEES comes in three delicious flavors: Bold Cola (fizzy and zingy), Mint Lime (cool and refreshing), and Green Apple (sweet and tangy). Think candy that actually works.' },
-  { question: 'How much does VEES cost?', answer: 'Just ₹10 per chew. That\'s one-tenth the price of an energy drink and one-eighth of your daily coffee. We also offer multi-pack options for even better value.' },
+  { question: 'How much does VEES cost?', answer: 'Just ₹15 per chew. That\'s one-tenth the price of an energy drink and one-eighth of your daily coffee. We also offer multi-pack options for even better value.' },
   { question: 'Can I carry VEES in my pocket?', answer: 'Absolutely! Each VEES chew comes in a tiny, pocket-sized pouch. No liquid, no cup, no mess. Just pop it in your pocket, bag, or wallet and go.' },
   { question: 'When will VEES be available?', answer: 'We\'re currently in pre-launch. Sign up for early access and be among the first to get your hands on VEES when we launch.' },
 ];

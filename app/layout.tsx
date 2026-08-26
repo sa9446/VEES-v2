@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://vees-v2.vercel.app"),
   title: "VEES — The Gods Ran On This",
   description:
-    "Pocket-sized caffeine chews that kick in 5 minutes. Only ₹10. Three amazing flavors. No sloshy stomach, no ₹120 price tag.",
+    "Pocket-sized caffeine chews that kick in 5 minutes. Only ₹15. Three amazing flavors. No sloshy stomach, no ₹120 price tag.",
   icons: {
     icon: [
       { url: "/favicon.svg", type: "image/svg+xml" },
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     siteName: "VEES",
     title: "VEES — The Gods Ran On This",
     description:
-      "Pocket-sized caffeine chews that kick in 5 minutes. Only ₹10. Three amazing flavors.",
+      "Pocket-sized caffeine chews that kick in 5 minutes. Only ₹15. Three amazing flavors.",
     locale: "en_US",
     images: [
       {
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "VEES — The Gods Ran On This",
     description:
-      "Pocket-sized caffeine chews that kick in 5 minutes. Only ₹10. Three amazing flavors.",
+      "Pocket-sized caffeine chews that kick in 5 minutes. Only ₹15. Three amazing flavors.",
     images: ["/og-image.png"],
   },
 };

@@ -5,8 +5,7 @@ import { motion } from 'framer-motion';
 import { Check, X } from 'lucide-react';
 import { useFlavor } from '@/contexts/FlavorContext';
 
-const benefits = [
-  { icon: '💸', title: 'No ₹120 Price Tag', subtitle: 'Only ₹10 per chew', description: 'Energy drinks cost ₹120. Coffee costs ₹80. VEES gives you the same kick for one-tenth the price.' },
+const benefits = [{icon: '💸', title: 'No ₹120 Price Tag', subtitle: 'Only ₹15 per chew', description: 'Energy drinks cost ₹120. Coffee costs ₹80. VEES gives you the same kick for one-tenth the price.' },
   { icon: '🫧', title: 'No Sloshy Stomach', subtitle: 'Zero liquid needed', description: 'Pop a chew, skip the 250ml can or hot cup. Your stomach stays happy while you stay energized.' },
   { icon: '⚡', title: 'Kicks in 5 Minutes', subtitle: 'Fastest energy on the go', description: 'Coffee takes 20-30 minutes. Energy drinks take 35-45. VEES melts fast and hits your system even faster.' },
   { icon: '👖', title: 'Fits in Your Pocket', subtitle: 'No bag, no cup, no mess', description: 'A tiny pouch that slides right into your pocket, wallet, or bag. Take energy anywhere without the bulk.' },
@@ -82,7 +81,7 @@ export default function Comparison() {
                 <Check className="w-4 h-4" /> VEES
               </div>
               <ul className="space-y-2 text-sm" style={{ color: colors.accentLight }}>
-                {['₹10 per dose', '5 min onset', 'Pocket-sized', 'Zero bloat'].map((item) => (
+                {['₹15 per dose', '5 min onset', 'Pocket-sized', 'Zero bloat'].map((item) => (
                   <li key={item} className="flex items-center justify-center gap-2">
                     <Check className="w-4 h-4 transition-colors duration-500" style={{ color: colors.accent }} /> {item}
                   </li>

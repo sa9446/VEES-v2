@@ -121,7 +121,7 @@ export default function Navbar() {
                 className="btn-buy flex items-center justify-center gap-2 text-lg mt-4"
               >
                 <ShoppingBag className="w-5 h-5" />
-                Buy Now — ₹10
+                Buy Now — ₹15
               </button>
             </div>
           </motion.div>

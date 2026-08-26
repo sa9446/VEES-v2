@@ -1,6 +1,6 @@
 # VEES - Energy, Evolved
 
-The official landing page for **VEES** — a fast-acting, pocket-sized ₹10 caffeine jelly chew delivering 60mg of fast-acting caffeine via oral sublingual absorption.
+The official landing page for **VEES** — a fast-acting, pocket-sized ₹15 caffeine jelly chew delivering 60mg of fast-acting caffeine via oral sublingual absorption.
 
 ## 🚀 Quick Start
 

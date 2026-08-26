@@ -28,7 +28,7 @@ export default function Footer() {
               <span className="text-xs font-semibold text-white/50 tracking-widest uppercase">Energy Chews</span>
             </div>
             <p className="text-white/60 text-sm max-w-xs leading-relaxed">
-              The Gods Ran On This. The ₹10 chew that&apos;s replacing coffee for thousands.
+              The Gods Ran On This. The ₹15 chew that&apos;s replacing coffee for thousands.
             </p>
           </motion.div>
 
@@ -52,7 +52,7 @@ export default function Footer() {
               samanvay.agrawal@yahoo.com
             </a>
             <div className="flex gap-3 mt-6">
-              {['100% Veg', 'Zero Sugar', '₹10'].map((badge) => (
+              {['100% Veg', 'Zero Sugar', '₹15'].map((badge) => (
                 <span key={badge} className="text-xs px-3 py-1 rounded-full bg-white/10 text-white/60">{badge}</span>
               ))}
             </div>

@@ -8,7 +8,7 @@ import { useFlavor } from '@/contexts/FlavorContext';
 const reviews = [
   { name: 'Aditya M.', role: 'College Student', avatar: '🧑‍🎓', text: 'VEES replaced my 3am coffee during exam prep. Melts in seconds and I actually feel focused without the jittery crash.', flavor: 'Mint Lime' },
   { name: 'Priya K.', role: 'Fitness Enthusiast', avatar: '💪', text: 'Pre-workout game changed. Pop a Green Apple 10 mins before the gym and I\'m ready to go. No bloated stomach.', flavor: 'Green Apple' },
-  { name: 'Rahul S.', role: 'Night Shift Worker', avatar: '🌙', text: 'At ₹10 it\'s a no-brainer. I was spending ₹3,600/month on Red Bull. VEES does the same for ₹300. Pocket-sized lifesaver.', flavor: 'Bold Cola' },
+  { name: 'Rahul S.', role: 'Night Shift Worker', avatar: '🌙', text: 'At ₹15 it\'s a no-brainer. I was spending ₹3,600/month on Red Bull. VEES does the same for ₹450. Pocket-sized lifesaver.', flavor: 'Bold Cola' },
   { name: 'Sneha T.', role: 'Freelance Designer', avatar: '🎨', text: 'Love that it\'s vegetarian and doesn\'t have all the sugar. The Cola flavor is genuinely delicious — tastes like a treat that works.', flavor: 'Bold Cola' },
   { name: 'Vikram P.', role: 'MBA Student', avatar: '📚', text: 'Carry it in my pocket to lectures. No need to find a café or carry a heavy bottle. Just pop and go. Total game changer.', flavor: 'Mint Lime' },
 

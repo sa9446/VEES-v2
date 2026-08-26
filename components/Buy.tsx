@@ -61,7 +61,7 @@ export default function Buy() {
                 We&apos;ll notify you the moment we launch — plus exclusive early-bird pricing.
               </p>
               <div className="space-y-3">
-                {['✅ Only ₹10 per chew', '✅ 3 delicious flavors', '✅ Free shipping on first order', '✅ 100% vegetarian, zero sugar'].map((item) => (
+                {['✅ Only ₹15 per chew', '✅ 3 delicious flavors', '✅ Free shipping on first order', '✅ 100% vegetarian, zero sugar'].map((item) => (
                   <p key={item} className="text-sm font-medium transition-colors duration-500"
                     style={{ color: colors.text }}>{item}</p>
                 ))}
@@ -83,7 +83,7 @@ export default function Buy() {
                   whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
                   className="w-full btn-primary flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed">
                   <ShoppingBag className="w-5 h-5" />
-                  {loading ? 'Signing up...' : submitted ? '✓ You\'re on the list!' : 'Get Early Access — ₹10'}
+                  {loading ? 'Signing up...' : submitted ? '✓ You\'re on the list!' : 'Get Early Access — ₹15'}
                 </motion.button>
                 {submitted && (
                   <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}

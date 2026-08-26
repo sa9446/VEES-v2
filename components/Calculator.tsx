@@ -11,7 +11,7 @@ export default function Calculator() {
 
   const energyDrinkPrice = 120;
   const coffeePrice = 80;
-  const veesPrice = 10;
+  const veesPrice = 15;
   const avgPrice = (energyDrinkPrice + coffeePrice) / 2;
 
   const monthlySavings = Math.round((avgPrice - veesPrice) * weeklyCups * 4.33);
@@ -131,7 +131,7 @@ export default function Calculator() {
             className="text-center text-sm pt-4"
             style={{ color: colors.accentLight }}
           >
-            💡 Based on average coffee (₹80) and energy drink (₹120) prices vs VEES (₹10).
+            💡 Based on average coffee (₹80) and energy drink (₹120) prices vs VEES (₹15).
           </motion.p>
         </div>
       </div>
